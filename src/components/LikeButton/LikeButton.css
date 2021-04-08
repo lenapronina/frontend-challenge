@@ -1,0 +1,24 @@
+.like-button {
+  position: absolute;
+  bottom: 23px;
+  right: 23px;
+  opacity: 0;
+  padding: 0;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  background-image: url(../../images/like-card-hover.svg);
+  background-repeat: no-repeat;
+  outline: none;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  z-index: 2;
+}
+
+.like-button:hover {
+  background-image: url(../../images/like-button-hover.svg);
+}
+
+.like-button_active {
+  background-image: url(../../images/like-button-active.svg);
+}
