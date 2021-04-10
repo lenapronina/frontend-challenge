@@ -1,9 +1,19 @@
 import React from 'react';
 import './NavItem.css';
 
-function NavItem({itemText}){
+function NavItem({
+  activeState,
+  itemText,
+  handleClick
+}){
+
+  const isActive = activeState ? 'nav__item_active' : '';
+
   return(
-    <button className="nav__item">{itemText}</button>
+    <button
+      className={`nav__item ${isActive}`}
+      onClick={handleClick}
+    >{itemText}</button>
   )
 }
 

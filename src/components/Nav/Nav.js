@@ -1,15 +1,58 @@
-import React from 'react';
+import React,  { useState, useEffect, useCallback } from 'react';
 import './Nav.css';
 
 import NavItem from '../NavItem/NavItem';
 
-function Nav(){
+function Nav({
+  path,
+  handleAllCatsClick,
+  handleLikedCatsClick,
+}){
+
+  // states for navitems
+  const [activeAllCatsButton, setActiveAllCatsButton] = useState(false);
+  const [activeLikedCatsButton, setActiveLikedCatsButton] = useState(false);
+
+  // manage navitem active state with router path
+  const isButtonActive = useCallback(() => {
+    if(path ==='/all-cats'){
+      setActiveAllCatsButton(true);
+      setActiveLikedCatsButton(false);
+    }
+
+    if(path ==='/liked-cats'){
+      setActiveLikedCatsButton(true);
+      setActiveAllCatsButton(false);
+    }
+
+    if(path ==='/not-found'){
+      setActiveLikedCatsButton(false);
+      setActiveAllCatsButton(false);
+    }
+    // else if(path ==='/liked-cats'){
+    //   setActiveLikedCatsButton(true);
+    //   setActiveAllCatsButton(false);
+    // } else {
+    //   setActiveLikedCatsButton(false);
+    //   setActiveAllCatsButton(false);
+    // }
+  },[path]);
+
+  // useEffect that checks every changing in isButtonActive callback
+  useEffect(()=>{
+    isButtonActive();
+  }, [isButtonActive]);
+
   return(
     <nav className="nav">
-      <NavItem 
+      <NavItem
+        activeState={activeAllCatsButton}
+        handleClick={handleAllCatsClick} 
         itemText="Все котики"
       />
-      <NavItem 
+      <NavItem
+        activeState={activeLikedCatsButton}
+        handleClick={handleLikedCatsClick} 
         itemText="Любимые котики"
       />
     </nav>

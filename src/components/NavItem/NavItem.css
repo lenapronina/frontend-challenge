@@ -8,8 +8,9 @@
   letter-spacing: 0.25px;
   color: rgba(255, 255, 255, 0.7);
   border: none;
+  outline: none;
   background-color: transparent;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.3s ease-in;
 }
 
 .nav__item_active {
