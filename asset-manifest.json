@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/frontend-challenge/static/css/main.74096611.chunk.css",
+    "main.js": "/frontend-challenge/static/js/main.9c178483.chunk.js",
+    "main.js.map": "/frontend-challenge/static/js/main.9c178483.chunk.js.map",
+    "runtime-main.js": "/frontend-challenge/static/js/runtime-main.f21127c0.js",
+    "runtime-main.js.map": "/frontend-challenge/static/js/runtime-main.f21127c0.js.map",
+    "static/js/2.4b8160df.chunk.js": "/frontend-challenge/static/js/2.4b8160df.chunk.js",
+    "static/js/2.4b8160df.chunk.js.map": "/frontend-challenge/static/js/2.4b8160df.chunk.js.map",
+    "static/js/3.d6389942.chunk.js": "/frontend-challenge/static/js/3.d6389942.chunk.js",
+    "static/js/3.d6389942.chunk.js.map": "/frontend-challenge/static/js/3.d6389942.chunk.js.map",
+    "index.html": "/frontend-challenge/index.html",
+    "static/css/main.74096611.chunk.css.map": "/frontend-challenge/static/css/main.74096611.chunk.css.map",
+    "static/js/2.4b8160df.chunk.js.LICENSE.txt": "/frontend-challenge/static/js/2.4b8160df.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/frontend-challenge/static/media/Roboto-Regular.a8d6ac03.ttf",
+    "static/media/cat-back.993e5cf9.svg": "/frontend-challenge/static/media/cat-back.993e5cf9.svg",
+    "static/media/LikeButton.css": "/frontend-challenge/static/media/like-card-hover.54448762.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f21127c0.js",
+    "static/js/2.4b8160df.chunk.js",
+    "static/css/main.74096611.chunk.css",
+    "static/js/main.9c178483.chunk.js"
+  ]
+}
