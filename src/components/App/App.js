@@ -6,7 +6,7 @@ import './App.css';
 import Header from '../Header/Header';
 import AllCats from '../AllCats/AllCats';
 import LikedCats from '../LikedCats/LikedCats';
-import NotFoundPage from '../NotFoundPage/NotFoundPage';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
 
@@ -174,7 +174,10 @@ useEffect(() => {
           />
         </Route>
         <Route path="/not-found">
-          <NotFoundPage />
+          <NotFound 
+            header="404"
+            description="страница не найдена, плак"
+          />
         </Route>
         <Redirect from="*" to="/not-found" />
       </Switch>
