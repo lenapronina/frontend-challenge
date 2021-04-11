@@ -138,8 +138,7 @@ function App() {
 
   return (
     <div className="app">
-      <Header 
-        path={path} 
+      <Header
         handleAllCatsClick={handleAllCatsClick}
         handleLikedCatsClick={handleLikedCatsClick}
       />
@@ -166,7 +165,7 @@ function App() {
             isDisabled={isDisabled}
           />
         </Route>
-        <Route path="/not-found">
+        <Route push path="/not-found">
           <NotFound 
             header="404"
             description="страница не найдена, плак"

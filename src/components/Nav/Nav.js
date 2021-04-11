@@ -1,13 +1,15 @@
 import React,  { useState, useEffect, useCallback } from 'react';
+import {  useLocation } from 'react-router-dom';
 import './Nav.css';
 
 import NavItem from '../NavItem/NavItem';
 
 function Nav({
-  path,
   handleAllCatsClick,
   handleLikedCatsClick,
 }){
+
+  const location = useLocation();
 
   // states for navitems
   const [activeAllCatsButton, setActiveAllCatsButton] = useState(false);
@@ -15,21 +17,26 @@ function Nav({
 
   // manage navitem active state with router path
   const isButtonActive = useCallback(() => {
-    if(path ==='/all-cats'){
-      setActiveAllCatsButton(true);
-      setActiveLikedCatsButton(false);
+
+    switch (location.pathname) {
+      case '/all-cats':
+        setActiveAllCatsButton(true);
+        setActiveLikedCatsButton(false);
+        break;
+      case '/liked-cats':
+        setActiveLikedCatsButton(true);
+        setActiveAllCatsButton(false);
+        break;
+      case '/not-found':
+        setActiveLikedCatsButton(false);
+        setActiveAllCatsButton(false);
+        break;
+      default:
+        setActiveLikedCatsButton(false);
+        setActiveAllCatsButton(false);
     }
 
-    if(path ==='/liked-cats'){
-      setActiveLikedCatsButton(true);
-      setActiveAllCatsButton(false);
-    }
-
-    if(path ==='/not-found'){
-      setActiveLikedCatsButton(false);
-      setActiveAllCatsButton(false);
-    }
-  },[path]);
+  },[location]);
 
   // useEffect that checks every changing in isButtonActive callback
   useEffect(()=>{
