@@ -6,7 +6,7 @@ import MoreCatsLoading from '../MoreCatsLoading/MoreCatsLoading';
 
 const CardsList = React.forwardRef((
 {
-  imgData,
+  allCards,
   handleLike,
   handleDislike,
   savedCards,
@@ -17,12 +17,12 @@ const CardsList = React.forwardRef((
   return (
     <>
     <ul className="card-list">{
-      imgData.images.map((image, index) => (
+      allCards.images.map((cardItem, index) => (
         <Card
           isDisabled={isDisabled}
           path={path} 
           key={index}
-          cardItem={image}
+          cardItem={cardItem}
           handleLike={handleLike}
           handleDislike={handleDislike}
           savedCards={savedCards}
@@ -30,7 +30,7 @@ const CardsList = React.forwardRef((
       ))
       }
     </ul>
-    { imgData.fetching && (<MoreCatsLoading />)}
+    { allCards.fetching && (<MoreCatsLoading />)}
     <div
       className='card-list__bottom-boundary'
       ref={ref} 

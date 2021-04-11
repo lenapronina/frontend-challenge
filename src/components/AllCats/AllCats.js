@@ -4,7 +4,7 @@ import './AllCats.css';
 import CardsList from '../CardsList/CardsList';
 
 const AllCats = React.forwardRef((
-{ imgData,
+{ allImages,
   handleLike,
   handleDislike,
   savedCards,
@@ -17,7 +17,7 @@ const AllCats = React.forwardRef((
       path={path}
       handleLike={handleLike}
       handleDislike={handleDislike} 
-      imgData={imgData}
+      allCards={allImages}
       ref={ref}
       savedCards={savedCards}
       isDisabled={isDisabled}

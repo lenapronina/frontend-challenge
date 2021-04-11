@@ -3,6 +3,8 @@ import { Route, Redirect, Switch, useHistory } from 'react-router-dom';
 import Dexie from 'dexie';
 import './App.css';
 
+import { useFetch, useInfiniteScroll } from '../../utils/customHooks';
+
 import Header from '../Header/Header';
 import AllCats from '../AllCats/AllCats';
 import LikedCats from '../LikedCats/LikedCats';
@@ -86,46 +88,6 @@ function App() {
     });
   }
 
-  const imgReducer = (state, action) => {
-    switch (action.type) {
-      case 'STACK_IMAGES':
-        return { ...state, images: state.images.concat(action.images) }
-      case 'FETCHING_IMAGES':
-        return { ...state, fetching: action.fetching }
-      default:
-        return state;
-    }
-  }
-  const [imgData, imgDispatch] = useReducer(imgReducer,{ images:[], fetching: true});
-  const pageReducer = (state, action) => {
-    switch (action.type) {
-      case 'ADVANCE_PAGE':
-        return { ...state, page: state.page + 1 }
-      default:
-        return state;
-    }
-  }
-  const [ pager, pagerDispatch ] = useReducer(pageReducer, { page: 0 })
-
-  
-
-  // implement infinite scrolling with intersection observer
-let bottomBoundaryRef = useRef(null);
-const scrollObserver = useCallback(
-  node => {
-    new IntersectionObserver(entries => {
-      entries.forEach(en => {
-        if (en.intersectionRatio > 0) {
-          pagerDispatch({ type: 'ADVANCE_PAGE' });
-        }
-      });
-    }).observe(node);
-  },
-  [pagerDispatch]
-);
-
-
-
   const handleAllCatsClick = () => {
     history.push('/all-cats');
     setPath('/all-cats');
@@ -136,28 +98,34 @@ const scrollObserver = useCallback(
     setPath('/liked-cats');
   }
 
-  useEffect(() => {
-   
-    fetch(`https://api.thecatapi.com/v1/images/search?limit=15&page=${pager.page}&order=Desc`)
-      .then(data => data.json())
-      .then(images => {
-        imgDispatch({ type: 'STACK_IMAGES', images })
-        imgDispatch({ type: 'FETCHING_IMAGES', fetching: false })
-      })
-      .catch(e => {
-        // handle error
-        imgDispatch({ type: 'FETCHING_IMAGES', fetching: false })
-        return e
-      })
-  }, [ pager.page, history]);
-
-  useEffect(() => {
-    if (bottomBoundaryRef.current) {
-      scrollObserver(bottomBoundaryRef.current);
+  const imgReducer = (state, action) => {
+    switch (action.type) {
+      case 'STACK_IMAGES':
+        return { ...state, images: state.images.concat(action.images) }
+      case 'FETCHING_IMAGES':
+        return { ...state, fetching: action.fetching }
+      default:
+        return state;
     }
-  }, [scrollObserver, bottomBoundaryRef]);
+  } 
+  const pageReducer = (state, action) => {
+    switch (action.type) {
+      case 'NEXT_PAGE':
+        return { ...state, page: state.page + 1 }
+      default:
+        return state;
+    }
+  }
+  
+  // reducers for infinite scroll
+  const [pager, pagerDispatch] = useReducer(pageReducer, { page: 0 }); 
+  const [allImages, allImagesDispatch] = useReducer(imgReducer,{ images:[], fetching: true });
+  // ref hook to check scroll bottom
+  const bottomBoundaryRef = useRef(null);
 
-
+  useFetch(pager, allImagesDispatch);
+  useInfiniteScroll(bottomBoundaryRef, pagerDispatch, path);
+  
   // check storage to load saved cats
   useEffect(() => {
     checkStorage();
@@ -180,7 +148,7 @@ const scrollObserver = useCallback(
         <Route path="/all-cats">
           <AllCats
             path={path} 
-            imgData={imgData}
+            allImages={allImages}
             ref={bottomBoundaryRef}
             handleLike={handleSaveCat}
             handleDislike={handleRemoveCat}

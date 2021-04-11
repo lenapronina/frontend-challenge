@@ -1,4 +1,4 @@
-import { CATS_API_BASEURL, CATS_API_HEADERS } from './constants';
+import { CATS_API_BASEURL, CATS_API_HEADERS, CATS_API_LIMIT } from './constants';
 
 class CatsApi {
   constructor({baseUrl, headers}){
@@ -6,25 +6,24 @@ class CatsApi {
     this._headers = headers;
   }
 
-  _checkResStatus(res){
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`)
-  }
-
-  getCats() {
-    return fetch(`${this._baseURL}/beatfilm-movies`, {
+  getCats(pageCounter) {
+    return fetch(`${this._baseURL}?limit=${CATS_API_LIMIT}&page=${pageCounter}`, {
       headers: this._headers
     })
-    .then(res => this._checkResStatus(res));
+    .then((res) => {
+      if(res.status === 200){
+        return res.json();
+      } else {
+        return Promise.reject('При получении данных произошла ошибка');
+      }
+    })
+    .then(data => data);
   }
 }
 
-
-const moviesApi = new CatsApi({
+const catsApi = new CatsApi({
   baseUrl: CATS_API_BASEURL,
   headers: CATS_API_HEADERS
 });
 
-export default moviesApi;
+export {catsApi};
