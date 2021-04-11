@@ -10,7 +10,8 @@ const CardsList = React.forwardRef((
   handleLike,
   handleDislike,
   savedCards,
-  path
+  path,
+  isDisabled
 }, ref) => {
 
   return (
@@ -18,6 +19,7 @@ const CardsList = React.forwardRef((
     <ul className="card-list">{
       imgData.images.map((image, index) => (
         <Card
+          isDisabled={isDisabled}
           path={path} 
           key={index}
           cardItem={image}

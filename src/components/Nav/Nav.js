@@ -18,22 +18,17 @@ function Nav({
     if(path ==='/all-cats'){
       setActiveAllCatsButton(true);
       setActiveLikedCatsButton(false);
-      console.log('all-cats')
     }
 
     if(path ==='/liked-cats'){
       setActiveLikedCatsButton(true);
       setActiveAllCatsButton(false);
-      console.log('liked-cats')
     }
 
     if(path ==='/not-found'){
       setActiveLikedCatsButton(false);
       setActiveAllCatsButton(false);
-      console.log('not found')
     }
-
-    console.log(path)
   },[path]);
 
   // useEffect that checks every changing in isButtonActive callback

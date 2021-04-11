@@ -8,3 +8,9 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.24);
   z-index: 1;
 }
+
+@media (max-width: 1150px) {
+  .header {
+    padding: 0 100px;
+  }
+}

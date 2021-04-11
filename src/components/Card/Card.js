@@ -8,9 +8,11 @@ function Card({
   handleLike,
   handleDislike,
   savedCards,
-  path
+  path,
+  isDisabled
 }){
 
+  // state for managing likeButton (style);
   const [isLiked, setIsLiked] = useState(false);
 
   const likeCat = () => {
@@ -26,31 +28,25 @@ function Card({
    
     const likedItem = savedCards.some((item) => item.id === cardItem.id);
 
+    // toggle isLiked state
     if(likedItem){
       setIsLiked(true);
     } else {
-      setIsLiked(false)
+      setIsLiked(false);
     }
-  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
-    const removeCat = (catItem, savedItems)=>{
-      const removedCat = savedItems.find(item => item.id === catItem.id);
-      return removedCat;
+  const toggleLike = () =>{
+    checkLike()
+    if(isLiked){
+      setIsLiked(false);
+      dislikeCat();
+    } else {
+      setIsLiked(true);
+      likeCat();
     }
-  
-    const toggleLike = () =>{
-      checkLike()
-      if(isLiked){
-        setIsLiked(false);
-        //dislikeCat(image);
-        dislikeCat();
-      } else {
-        setIsLiked(true);
-      
-        likeCat();
-      }
-    }
+  }
   
     useEffect(()=> {
       checkLike();
@@ -58,7 +54,8 @@ function Card({
   
   return(
     <li className="card" style={{ backgroundImage:`url(${cardItem.url})` }}>
-      <LikeButton 
+      <LikeButton
+        isDisabled={isDisabled}
         handleLike={toggleLike}
         isLiked={isLiked}
       />

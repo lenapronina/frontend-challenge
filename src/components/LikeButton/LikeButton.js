@@ -3,9 +3,9 @@ import './LikeButton.css';
 
 function LikeButton ({
   handleLike,
-  isLiked
+  isLiked,
+  isDisabled
 }) {
-
 
   const isLikedClassName = isLiked ? 'like-button_active' : '';
 
@@ -13,6 +13,7 @@ function LikeButton ({
     <button 
       className={`like-button ${isLikedClassName}`}
       onClick={handleLike}
+      disabled={isDisabled ? true : false}
     ></button>
   )
 }

@@ -8,9 +8,11 @@ function LikedCats ({
   catData,
   handleLike,
   handleDislike,
-  savedCards
+  savedCards,
+  isDisabled
 }){
 
+  // check if there are no liked cats
   const hasSavedCats = catData.length > 0 ? true : false;
 
   return( 
@@ -18,6 +20,7 @@ function LikedCats ({
       <ul className="card-list card-list__liked">
         { catData.map((item, index) => (
           <Card
+            isDisabled={isDisabled}
             path={path} 
             key={index}
             cardItem={item}

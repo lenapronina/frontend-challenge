@@ -8,7 +8,8 @@ const AllCats = React.forwardRef((
   handleLike,
   handleDislike,
   savedCards,
-  path
+  path,
+  isDisabled
 }, ref ) => {
   
   return(
@@ -19,6 +20,7 @@ const AllCats = React.forwardRef((
       imgData={imgData}
       ref={ref}
       savedCards={savedCards}
+      isDisabled={isDisabled}
     />
   )
 })
