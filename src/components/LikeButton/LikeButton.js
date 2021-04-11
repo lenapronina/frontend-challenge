@@ -1,9 +1,19 @@
 import React from 'react';
 import './LikeButton.css';
 
-function LikeButton () {
+function LikeButton ({
+  handleLike,
+  isLiked
+}) {
+
+
+  const isLikedClassName = isLiked ? 'like-button_active' : '';
+
   return(
-    <button className="like-button"></button>
+    <button 
+      className={`like-button ${isLikedClassName}`}
+      onClick={handleLike}
+    ></button>
   )
 }
 
