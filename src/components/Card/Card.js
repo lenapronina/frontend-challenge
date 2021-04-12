@@ -17,12 +17,13 @@ function Card({
 
   const likeCat = () => {
     handleLike(cardItem);
-    setIsLiked(false);
+    setIsLiked(true);
   }
 
   const dislikeCat = () => {
     handleDislike(cardItem);
-    setIsLiked(true);
+    setIsLiked(false);
+   
   }
 
   // check that cat has saved
@@ -37,7 +38,7 @@ function Card({
       setIsLiked(false);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [savedCards])
   
   const toggleLike = () =>{
     if(isLiked){
