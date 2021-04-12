@@ -17,10 +17,12 @@ function Card({
 
   const likeCat = () => {
     handleLike(cardItem);
+    setIsLiked(false);
   }
 
   const dislikeCat = () => {
     handleDislike(cardItem);
+    setIsLiked(true);
   }
 
   // check that cat has saved
@@ -38,12 +40,9 @@ function Card({
   }, [])
   
   const toggleLike = () =>{
-    checkLike()
     if(isLiked){
-      setIsLiked(false);
       dislikeCat();
     } else {
-      setIsLiked(true);
       likeCat();
     }
   }

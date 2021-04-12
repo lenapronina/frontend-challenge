@@ -42,50 +42,42 @@ function App() {
     .then((initialCats) => {
       setSavedCats(initialCats)
     })
-    .catch((err)=> {
-      console.log(err);
-    });
+  
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [path]);
 
   const handleSaveCat = (cat) => {
-
     setIsDisabled(true);
+    // check that cat hasnt created yet
+    const existedCat = savedCats.find( item => item.id === cat.id);
+    if(!existedCat){
+      // new cat object
+      const newCat = {
+        id: cat.id,
+        catId: cat.id,
+        url: cat.url
+      }
 
-    // new cat object
-    const newCat = {
-      id: cat.id,
-      catId: cat.id,
-      url: cat.url
+      db.cats.add(newCat)
+      .then(() => {
+        checkStorage();
+        setIsDisabled(false);
+      })
     }
-
-    db.cats.add(newCat)
-    .then(() => {
-      const newCats = [newCat, ...savedCats];
-      // update state with new object
-      setSavedCats(newCats);
-      setIsDisabled(false);
-    })
-    .catch((err)=> {
-      console.log(err);
-      setIsDisabled(false);
-    });
+    
   }
 
   const handleRemoveCat = (cat) => {
-
     setIsDisabled(true);
-
-    db.cats.delete(cat.id)
-    .then(() => {
-      const newCats = savedCats.filter((card) => card.id !== cat.id);
-      setSavedCats(newCats);
-      setIsDisabled(false);
-    })
-    .catch((err)=> {
-      console.log(err);
-      setIsDisabled(false);
-    });
+    // check that cat hasnt removed yet
+    const existedCat = savedCats.find( item => item.id === cat.id);
+    if(existedCat){
+      db.cats.delete(cat.id)
+      .then(() => {
+        checkStorage();
+        setIsDisabled(false);
+      })
+    }
   }
 
   const handleAllCatsClick = () => {
