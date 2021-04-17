@@ -7,18 +7,30 @@
   width: 48px;
   height: 48px;
   background-color: transparent;
-  background-image: url(../../images/like-card-hover.svg);
-  background-repeat: no-repeat;
+  background: url('../../images/css_sprites.png') -10px -113px no-repeat;
   outline: none;
   border: none;
-  transition: all 0.2s ease-in-out;
   z-index: 2;
+  cursor: pointer;
 }
 
-.like-button:hover {
-  background-image: url(../../images/like-button-hover.svg);
+.like-button::after{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: "";
+  background: url('../../images/css_sprites.png') -175px -10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;    
+}
+
+.like-button:hover::after {
+  transition: opacity 0.3s ease-in;  
+  opacity: 1;
 }
 
 .like-button_active {
-  background-image: url(../../images/like-button-active.svg);
+  background: url('../../images/css_sprites.png') -107px -10px;
 }
